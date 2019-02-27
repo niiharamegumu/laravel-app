@@ -10,6 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/**
+ * TOP画面
+*/
+Route::get('/', 'HomeController@index')->name('home');
+
+/**
+ * 認証機能
+*/
+Auth::routes();
 
 /**
  * 各フォルダーのタスク表示
