@@ -1,12 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index ( Request $request ) {
-      return view('home');
+      $user = Auth::user();
+      $folder = $user->folders()->first();
+
+      if ( is_null($folder) ) {
+        return view('home');
+      }
+
+      return redirect()->route('tasks.index', ['id' => $folder->id]);
+
     }
 }
