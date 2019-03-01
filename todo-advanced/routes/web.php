@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
   /**
   * 各フォルダーのタスク表示
   */
-  Route::get('/folders/{id}/tasks', 'TaskController@index')->name('tasks.index');
+  Route::get('/folders/{folder}/tasks', 'TaskController@index')->name('tasks.index');
 
   /**
   * フォルダーの新規追加
@@ -37,12 +37,12 @@ Route::group(['middleware' => 'auth'], function() {
   /**
   * 各フォルダーにタスクの追加
   */
-  Route::get('/folders/{id}/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');
-  Route::post('/folders/{id}/tasks/create', 'TaskController@create');
+  Route::get('/folders/{folder}/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');
+  Route::post('/folders/{folder}/tasks/create', 'TaskController@create');
 
   /**
   * タスクの編集
   */
-  Route::get('/folders/{id}/tasks/{task_id}/edit', 'TaskController@showEditForm')->name('tasks.edit');
-  Route::post('/folders/{id}/tasks/{task_id}/edit', 'TaskController@edit');
+  Route::get('/folders/{folder}/tasks/{task}/edit', 'TaskController@showEditForm')->name('tasks.edit');
+  Route::post('/folders/{folder}/tasks/{task}/edit', 'TaskController@edit');
 });

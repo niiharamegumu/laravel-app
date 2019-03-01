@@ -11,48 +11,44 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function index ( int $id ) {
+    public function index ( Folder $folder ) {
       $folders = Auth::user()->folders()->get();
-      $current_folder = Folder::find($id);
-      $tasks = $current_folder->tasks()->get();
+      $tasks = $folder->tasks()->get();
 
+      $tasks = $folder->tasks()->get();
 
       return view('tasks.index', [
         'folders'           => $folders,
-        'current_folder_id' => $current_folder->id,
+        'current_folder_id' => $folder->id,
         'tasks'             => $tasks,
       ]);
     }
 
-    public function showCreateForm (int $id) {
-      return view('tasks/create', ['folder_id' => $id]);
+    public function showCreateForm (Folder $folder) {
+      return view('tasks/create', ['folder_id' => $folder->id]);
     }
 
-    public function showEditForm ( int $id, int $task_id ) {
-      $task = Task::find($task_id);
-
+    public function showEditForm ( Folder $folder, Task $task ) {
       return view('tasks/edit', ['task' => $task]);
     }
 
-    public function create ( int $id, CreateTask $request ) {
-      $current_folder = Folder::find($id);
+    public function create ( Folder $folder, CreateTask $request ) {
 
       $task = new Task;
       $task->title = $request->title;
       $task->due_date = $request->due_date;
 
-      $current_folder->tasks()->save($task);
-      return redirect()->route('tasks.index', ['id' => $current_folder->id]);
+      $folder->tasks()->save($task);
+
+      return redirect()->route('tasks.index', ['id' => $folder->id]);
     }
 
-    public function edit ( int $id, int $task_id, EditTask $request ) {
-      $task = Task::find($task_id);
-
+    public function edit ( Folder $folder, Task $task, EditTask $request ) {
       $task->title = $request->title;
       $task->status = $request->status;
       $task->due_date = $request->due_date;
       $task->save();
 
-      return redirect()->route('tasks.index', ['id' => $task->folder_id]);
+      return redirect()->route('tasks.index', ['id' => $folder->id]);
     }
 }
