@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/board', 'BoardController@index')->name('board.index');
+Route::post('/board', 'BoardController@addComment')->name('board.add');
