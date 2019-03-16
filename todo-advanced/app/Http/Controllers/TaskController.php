@@ -15,8 +15,6 @@ class TaskController extends Controller
       $folders = Auth::user()->folders()->get();
       $tasks = $folder->tasks()->get();
 
-      $tasks = $folder->tasks()->get();
-
       return view('tasks.index', [
         'folders'           => $folders,
         'current_folder_id' => $folder->id,
