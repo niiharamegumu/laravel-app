@@ -69,3 +69,21 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## ■ パッケージ
+### - laravel-mix
+laravel内でのjs,SCSS,Vueコンポーネントなどのコンパイルを用意に指定できる
+```js
+const mix = require('laravel-mix')
+
+mix.browserSync('vuesplash.test')
+  .js('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css')
+  .version()
+```
+### - browserSync
+JavaScript や PHP ファイルが変更されたときに自動的にブラウザがリロードされるようになる。
+```bash
+npm run watch
+```
