@@ -87,3 +87,8 @@ JavaScript や PHP ファイルが変更されたときに自動的にブラウ�
 ```bash
 npm run watch
 ```
+## ■ Memo
+PHPUnitの実行コマンド
+```base
+./vendor/bin/phpunit --testdox
+```
